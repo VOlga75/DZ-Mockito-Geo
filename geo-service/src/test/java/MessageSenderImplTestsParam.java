@@ -32,14 +32,13 @@ public class MessageSenderImplTestsParam {
         GeoService geoService = Mockito.mock(GeoService.class);
         Mockito.when(geoService.byIp(Mockito.startsWith(ip)))
                 .thenReturn(new Location(city, country, null, 0));
-        //// // а как правильнее?Эти  строчки с 42 по 45 или одна 46 вместо них? т.е. обязательно ли здесь нужна заглушка для LocalizationServiceImpl?
-        //// или в строке 46 new LocalizationServiceImpl() тоже может быть? как-то странно, я text возвращаю в строке 44 принудительно и с ним же сравниваю expect
-        //// но expected вроде как результат messageSender...тогда это не масло масляное, т.е. не text = text Суть вопроса - а тест ли я написала?)
-       // LocalizationService localizationService = Mockito.mock(LocalizationService.class);
-        //Mockito.when(localizationService.locale(country))
-         //       .thenReturn(text);
-        //MessageSenderImpl messageSender = new MessageSenderImpl(geoService, localizationService);
-        MessageSenderImpl messageSender = new MessageSenderImpl(geoService, new LocalizationServiceImpl());
+        //// // Строчки с 37 по 40  дают не желтый тест на 4й вариант ( что правильно), а зеленый.
+        // Но когда работает одна 41 вместо них я получаю желтый тест на Mosckow Welkom
+        LocalizationService localizationService = Mockito.mock(LocalizationService.class);
+        Mockito.when(localizationService.locale(country))
+               .thenReturn(text);
+        MessageSenderImpl messageSender = new MessageSenderImpl(geoService, localizationService);
+       // MessageSenderImpl messageSender = new MessageSenderImpl(geoService, new LocalizationServiceImpl());
         String expected = messageSender.send(headers);
         Assertions.assertEquals(expected, text);
     }

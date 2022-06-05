@@ -27,10 +27,12 @@ public class MessageSenderImplTests {
     @Test
     public void testSendRU() { // пример работы теста без параметра
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, "172.123.12.19");
-        GeoService geoServiceRu = Mockito.mock(GeoServiceImpl.class);
+       // GeoService geoServiceRu = Mockito.mock(GeoServiceImpl.class); // мокировать класс бессмысленно 
+        GeoService geoServiceRu = Mockito.mock(GeoService.class);
         Mockito.when(geoServiceRu.byIp(Mockito.startsWith("172.")))
                 .thenReturn(new Location("Moscow", Country.RUSSIA, null, 0));
-        LocalizationService localizationServiceRu = Mockito.mock(LocalizationServiceImpl.class);
+      //  LocalizationService localizationServiceRu = Mockito.mock(LocalizationServiceImpl.class);
+        LocalizationService localizationServiceRu = Mockito.mock(LocalizationService.class);
         Mockito.when(localizationServiceRu.locale(RUSSIA))
                 .thenReturn("Добро пожаловать");
         MessageSenderImpl messageSenderRU = new MessageSenderImpl(geoServiceRu, localizationServiceRu);

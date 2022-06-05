@@ -18,5 +18,8 @@ public class LocalizationServiceImplTests {
         Country countryForTest = Country.BRAZIL;
         String expected = sut.locale(countryForTest);
         Assertions.assertEquals(expected, "Welcome");
+        countryForTest = Country.RUSSIA;
+        expected = sut.locale(countryForTest);
+        Assertions.assertEquals(expected, "Добро пожаловать");
     }
 }

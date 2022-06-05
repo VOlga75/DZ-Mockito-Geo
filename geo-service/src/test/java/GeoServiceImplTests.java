@@ -24,10 +24,10 @@ public class GeoServiceImplTests {
         Assertions.assertThrows(expected, () -> sut.byCoordinates(3.5, 3.3));
     }
 
-    @Test
+ /*   @Test
     public void testExceptionByCoordinatesMoc() {
         GeoService geoService = Mockito.mock(GeoServiceImpl.class);
         Mockito.when(geoService.byCoordinates(3.3, 5.5)) // почему нельзя c any() Mockito.when(geoService.byCoordinates(any()))
                 .thenThrow(new IllegalArgumentException());
-    }
+    }*/
 }
